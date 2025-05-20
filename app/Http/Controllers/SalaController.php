@@ -7,23 +7,26 @@ use Illuminate\Http\Request;
 
 class SalaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
-{
-    $salas = Sala::all();
-    return view('salas.index', compact('salas'));
-}
+    {
+        $salas = Sala::all();
+        return view('salas.index', compact('salas'));
+    }
 
-public function create()
-{
-    return view('salas.create');
-}
+    public function create()
+    {
+        return view('salas.create');
+    }
 
-public function store(Request $request)
-{
-    Sala::create($request->all());
-    return redirect()->route('salas.index');
-}
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'capacidade' => 'required|integer|min:1',
+        ]);
+
+        Sala::create($request->all());
+
+        return redirect()->route('salas.index')->with('success', 'Sala criada com sucesso!');
+    }
 }
