@@ -5,8 +5,6 @@
 </head>
 <body>
   <h1>
-    <span class="badge">Laravel</span>
-    <span class="badge">Blade</span>
     Reserva de Salas
   </h1>
   <p>
