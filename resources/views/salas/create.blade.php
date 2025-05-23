@@ -1,28 +1,22 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-xl font-semibold">Cadastrar Sala</h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="max-w-xl mx-auto p-4 bg-white shadow rounded">
-        <form method="POST" action="{{ route('salas.store') }}">
-            @csrf
+@section('title', 'Cadastrar Nova Sala')
 
-            <div class="mb-4">
-                <label class="block font-medium">Nome da Sala:</label>
-                <input type="text" name="nome" required
-                    class="w-full border border-gray-300 rounded px-3 py-2 mt-1">
-            </div>
+@section('content')
+<section>
+    <h2>Cadastrar Nova Sala</h2>
+    <form method="POST" action="{{ route('salas.store') }}">
+        @csrf
+        <label for="nome">Nome da Sala</label>
+        <input type="text" id="nome" name="nome" required>
 
-            <div class="mb-4">
-                <label class="block font-medium">Capacidade:</label>
-                <input type="number" name="capacidade" required min="1"
-                    class="w-full border border-gray-300 rounded px-3 py-2 mt-1">
-            </div>
+        <label for="capacidade">Capacidade</label>
+        <input type="number" id="capacidade" name="capacidade" min="1" required>
 
-            <button type="submit"
-                class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-                Salvar Sala
-            </button>
-        </form>
-    </div>
-</x-app-layout>
+        <label for="recursos">Recursos (ex: Projetor, Ar-condicionado...)</label>
+        <textarea id="recursos" name="recursos"></textarea>
+
+        <input type="submit" value="Cadastrar">
+    </form>
+</section>
+@endsection

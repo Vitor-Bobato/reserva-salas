@@ -1,40 +1,30 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-xl font-semibold">Nova Reserva</h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="max-w-xl mx-auto p-4 bg-white shadow rounded">
-        <form method="POST" action="{{ route('reservas.store') }}">
-            @csrf
+@section('title', 'Reservar Sala')
 
-            <div class="mb-4">
-                <label class="block font-medium">Sala:</label>
-                <select name="sala_id" required
-                    class="w-full border border-gray-300 rounded px-3 py-2 mt-1">
-                    @foreach ($salas as $sala)
-                        <option value="{{ $sala->id }}">
-                            {{ $sala->nome }} ({{ $sala->capacidade }} pessoas)
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+@section('content')
+<section>
+    <h2>Reservar Sala</h2>
+    <form method="POST" action="{{ route('reservas.store') }}">
+        @csrf
+        <label for="sala_id">Sala</label>
+        <select id="sala_id" name="sala_id" required>
+            <option value="">Selecione...</option>
+            @foreach($salas as $sala)
+                <option value="{{ $sala->id }}">{{ $sala->nome }}</option>
+            @endforeach
+        </select>
 
-            <div class="mb-4">
-                <label class="block font-medium">Data:</label>
-                <input type="date" name="data" required
-                    class="w-full border border-gray-300 rounded px-3 py-2 mt-1">
-            </div>
+        <label for="data">Data</label>
+        <input type="date" id="data" name="data" required>
 
-            <div class="mb-4">
-                <label class="block font-medium">Horário:</label>
-                <input type="time" name="horario" required
-                    class="w-full border border-gray-300 rounded px-3 py-2 mt-1">
-            </div>
+        <label for="hora_inicio">Hora de Início</label>
+        <input type="time" id="hora_inicio" name="hora_inicio" required>
 
-            <button type="submit"
-                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                Reservar
-            </button>
-        </form>
-    </div>
-</x-app-layout>
+        <label for="hora_fim">Hora de Fim</label>
+        <input type="time" id="hora_fim" name="hora_fim" required>
+
+        <input type="submit" value="Reservar">
+    </form>
+</section>
+@endsection
